@@ -42,6 +42,34 @@ python test_environment.py
 python your_test_code.py
 ```
 
+**Installation Options:**
+
+Option 1 - **Direct from GitHub (Recommended for compatibility):**
+```bash
+# Install this modernized fork directly
+pip install git+https://github.com/tamio0800/RecBole.git
+
+# Or clone and install in development mode
+git clone https://github.com/tamio0800/RecBole.git
+cd RecBole
+pip install -e .
+```
+
+Option 2 - **Docker Environment (Recommended for consistency):**
+```bash
+# Clone and use Docker for isolated environment
+git clone https://github.com/tamio0800/RecBole.git
+cd RecBole
+docker-compose up -d
+docker-compose exec recbole bash
+```
+
+Option 3 - **Original version (may have compatibility issues):**
+```bash
+# Original RecBole (Python 3.10 compatibility not guaranteed)
+pip install recbole
+```
+
 📖 **See [Troubleshooting Guide](troubleshooting_guide.md) for detailed compatibility fixes and best practices.**
 
 ---
