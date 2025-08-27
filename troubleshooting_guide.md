@@ -6,10 +6,32 @@
 
 這個 Docker 環境已經修復了以下主要兼容性問題：
 
-- ✅ **numpy 2.0 兼容性**：修復了 `np.float_`, `np.int_`, `np.bool_` 等過時屬性
+### **核心庫兼容性**
+- ✅ **numpy 2.0 兼容性**：修復了 `np.float_`, `np.int_`, `np.bool_`, `np.long_` 等過時屬性
 - ✅ **scipy 兼容性**：修復了 `dok_matrix._update()` 方法被移除的問題
 - ✅ **PyTorch 2.6 兼容性**：修復了 `torch.load()` 的 `weights_only` 參數問題
 - ✅ **ray tune 延遲導入**：解決了不需要 hyperparameter tuning 時的導入錯誤
+
+### **受影響的文件和模型**
+
+**numpy 2.0 修復（4 個文件）：**
+- `recbole/config/configurator.py` - 核心兼容性設置
+- `recbole/evaluator/metrics.py` - 評估指標計算
+- `recbole/trainer/hyper_tuning.py` - 超參數調整
+- `recbole/model/layers.py` - 模型層定義
+
+**scipy ._update 修復（7 個模型）：**
+- `NGCF`, `LightGCN`, `NCL`, `GCMC`, `SpectralCF`, `KGIN`, `MCCLK` 等圖神經網路模型
+
+**torch.load 修復（8 個文件）：**
+- `recbole/trainer/trainer.py` - 模型訓練器
+- `recbole/quick_start/quick_start.py` - 快速開始工具
+- `S3Rec`, `RACT`, `NeuMF`, `NAIS`, `ConvNCF`, `KD_DAGFM` 等預訓練模型
+
+### **測試結果確認**
+✅ **模型讀取機制**：`load_data_and_model()` 函數正常運行
+✅ **推論功能**：包括 embedding 提取、評分預測、推薦排序、批次推論
+✅ **評估機制**：RecBole 內建評估器正常計算所有指標
 
 ## 🔧 常見問題和解決方案
 

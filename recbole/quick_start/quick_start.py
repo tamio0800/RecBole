@@ -254,7 +254,8 @@ def load_data_and_model(model_file):
     """
     import torch
 
-    checkpoint = torch.load(model_file)
+    # PyTorch 2.6 兼容性：設置 weights_only=False 以支持完整的模型檢查點
+    checkpoint = torch.load(model_file, weights_only=False)
     config = checkpoint["config"]
     init_seed(config["seed"], config["reproducibility"])
     init_logger(config)
